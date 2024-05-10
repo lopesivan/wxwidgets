@@ -24,6 +24,10 @@ CPPFLAGS   += `$(WX_CONFIG) --cppflags`
 all  : main
 clean:
 	/bin/rm -rf main main.o
+
+compress:
+	upx -9 main.exe
+
 # END OF FILE
 
 # wx-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--release] [--version-full]
