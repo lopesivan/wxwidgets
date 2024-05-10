@@ -8,13 +8,15 @@ CC          = $(ARCH)-w64-mingw32-gcc
 WINDRES     = $(ARCH)-w64-mingw32-windres
 STRIP       = $(ARCH)-w64-mingw32-strip
 
-WX_CONFIG   = /usr/$(ARCH)-w64-mingw32/lib/wx/config/$(ARCH)-w64-mingw32-msw-ansi-static-$(V)
+MODE        = ansi
+#MODE        = unicode
+
+WX_CONFIG   = /usr/$(ARCH)-w64-mingw32/lib/wx/config/$(ARCH)-w64-mingw32-msw-$(MODE)-static-$(V)
 
 # if you dont want a static binary, remove this flag.
 # NOTE: you will need each dependency DLL included with the executable.
 LDFLAGS     = -static
 CXXFLAGS    = -O3 -s
-
 WARNINGS   := -Wall
 GDBFLAGS   := -g
 CXX        := `$(WX_CONFIG) --cxx`

@@ -35,9 +35,9 @@ MyFrame::MyFrame(const wxString& title)
     wxPanel* panel = new wxPanel(this, wxID_ANY);
 
     // Inicializa lista de caminhos de imagens (substitua com os seus caminhos)
-    imagePaths     = {"/workspace/wxwidgets/03/image1.jpg",
-                      "/workspace/wxwidgets/03/image2.jpg",
-                      "/workspace/wxwidgets/03/image3.jpg"};
+    imagePaths     = {".\\image1.jpg",
+                      ".\\image2.jpg",
+                      ".\\image3.jpg"};
 
     // Cria e posiciona os botões
     wxButton* btnPrev =
