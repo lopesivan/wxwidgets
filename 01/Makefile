@@ -1,22 +1,36 @@
-# Makefile: A standard Makefile for main.c using MinGW-w64
+# Makefile: A standard Makefile for main.c
 
-V           = 3.2.4
-WX          = ${HOME}/wx/wxMSW-${V}_gcc1220_x64_Dev
-WXsrc       = ${HOME}/wx/wxWidgets-${V}
+V           = 3.2
+#ARCH        = i686
+ARCH        = x86_64
+CXX         = $(ARCH)-w64-mingw32-g++
+CC          = $(ARCH)-w64-mingw32-gcc
+WINDRES     = $(ARCH)-w64-mingw32-windres
+STRIP       = $(ARCH)-w64-mingw32-strip
 
-WARNINGS    = -Wall
-GDBFLAGS    = -g
-CXX         = x86_64-w64-mingw32-g++
-LDLIBS      = -L$(WX)/lib/gcc1220_x64_dll -lwxmsw32u_core_gcc1220_x64 -lwxbase32u_gcc1220_x64
-CPPFLAGS    = -I${WXsrc}/include -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL  -I$(WX)/lib/gcc1220_x64_dll/mswu -D__WXMSW__ -D_UNICODE $(WARNINGS) $(GDBFLAGS)
+WX_CONFIG   = /usr/$(ARCH)-w64-mingw32/lib/wx/config/$(ARCH)-w64-mingw32-msw-ansi-static-$(V)
+
+# if you dont want a static binary, remove this flag.
+# NOTE: you will need each dependency DLL included with the executable.
+LDFLAGS     = -static
+CXXFLAGS    = -O3 -s
+
+WARNINGS   := -Wall
+GDBFLAGS   := -g
+CXX        := `$(WX_CONFIG) --cxx`
+LDLIBS     += `$(WX_CONFIG) --libs`
+CPPFLAGS   += `$(WX_CONFIG) --cppflags`
 
 all  : main
-main: main.o
-	$(CXX) -o main main.o $(LDLIBS)
-
-main.o: main.cpp
-	$(CXX) $(CPPFLAGS) -c main.cpp
-
 clean:
 	/bin/rm -rf main main.o
+# END OF FILE
 
+# wx-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--release] [--version-full]
+#            [--list] [--selected-config] [--host=HOST] [--toolkit=TOOLKIT]
+#            [--universal[=yes|no]] [--unicode[=yes|no]] [--static[=yes|no]]
+#            [--debug[=yes|no]] [--version[=VERSION]] [--flavour=FLAVOUR]
+#            [--basename] [--cc] [--cxx]
+#            [--cppflags [base]] [--cxxflags [base]] [--cflags]
+#            [--rescomp] [--linkdeps] [--ld] [--utility=UTIL]
+#            [--libs [LIBS...]] [--optional-libs [LIBS...]]

@@ -1,16 +1,17 @@
 [
   {
     "arguments": [
-      "/usr/bin/g++",
+      "/usr/bin/x86_64-w64-mingw32-g++",
       "-c",
-      "-I/usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.0",
-      "-I/usr/include/wx-3.0",
+      "-O3",
+      "-I/usr/x86_64-w64-mingw32/lib/wx/include/x86_64-w64-mingw32-msw-ansi-static-3.2",
+      "-I/usr/x86_64-w64-mingw32/include/wx-3.2",
       "-D_FILE_OFFSET_BITS=64",
-      "-DWXUSINGDLL",
-      "-D__WXGTK__",
-      "-Wall",
-      "-g",
-      "-pthread",
+      "-D__WXMSW__",
+      "-m64",
+      "-Wl,--subsystem,windows",
+      "-mwindows",
+      "/usr/x86_64-w64-mingw32/lib/libwx_msw-3.2-x86_64-w64-mingw32.a",
       "-o",
       "main",
       "main.cpp"
